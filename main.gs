@@ -14,7 +14,6 @@ function doPost(e){
   "chat_ID": "405582582",
   "text": "DEBUG"// + e.postData.contents.toString()
   }
-
 //----------------------------------
 
 function identificar(e){
@@ -49,7 +48,6 @@ function identificar(e){
       "text": "Send me a word plz - -"
     }
    }
-     
   return mensaje;
 }
 
@@ -58,12 +56,29 @@ function getDict(i){
   if (i.length >= 32) return "The word seems too long :|";
   
   //fetch Yandex Dict
-  
   var yandexAPIkey = "dict.1.1.1145141919810:APIKEY"; 
   var res = UrlFetchApp.fetch("https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=" + yandexAPIkey + "&lang=en-en&text=" + i);
   var yandex = res.getContentText();
   
-  return yandex;
-}
+  //var yandex = '{"head":{},"def":[{"text":"telegram","pos":"noun","ts":"ˈtelɪgræm","tr":[{"text":"cablegram","pos":"noun","syn":[{"text":"wire","pos":"noun"},{"text":"cable","pos":"noun"}]},{"text":"despatch","pos":"noun","syn":[{"text":"dispatch","pos":"noun"}]}]}]}';
+  //debug
+  
+  var j = JSON.parse(yandex);
+  var o = "";
+  j.def.forEach(function(def){  //Google Apps Script does not support arrow operators (=>) ;(
+     o += ("**" +def.text + "**   " + def.pos + ".  "+ "📢 " + def.ts+"     ");
+     var i = 1;
+     def.tr.forEach(function(meaning){
+      o += (i++) + "." + meaning.text + ": ";
+      meaning.syn.forEach(function(syn){
+        o+=(syn.text + " ");
+      });
+      o+=(";  ");
+     });
+
+  });
+
+  
+  return o;
 
 }
