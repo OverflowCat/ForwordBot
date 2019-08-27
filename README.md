@@ -1,8 +1,10 @@
-# Forwords
+# Forword Bot ʟᴇɢᴀᴄʏ
+> Dict src from Yandex.
+
 A Telegram dictionary bot.
 
 ## Demo
-**[Forwordsbot](https://t.me/forwordsbot) on Telegram**
+**[ForwordyBot](https://t.me/forwordybot) on Telegram**
 
 > A Telegram dictionary bot by [@OverflowCat](https://t.me/overflowcat). 
 
